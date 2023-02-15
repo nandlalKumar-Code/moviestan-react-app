@@ -1,0 +1,1 @@
+Movie app built using react and matrial ui which gives user to search or can see trending movies /tv series . It also provides user overview as well as user can search or filter using the genre.User can see the trailer of the movie.
