@@ -12,7 +12,6 @@ import {
 import "./ContentModal.css";
 import Button from '@mui/material/Button';
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Filter } from "@mui/icons-material";
 
 const style = {
   position: 'absolute',
@@ -143,63 +142,6 @@ export default function ContentModal({ children, media_type, id }) {
           </Box>
         </Fade>
       </Modal>
-        {/* <Box>
-        <Fade in={open}>
-          {content && (
-            <div className={classes.paper}>
-              <div className="ContentModal">
-                <img
-                  src={
-                    content.poster_path
-                      ? `${img_500}/${content.poster_path}`
-                      : unavailable
-                  }
-                  alt={content.name || content.title}
-                  className="ContentModal__portrait"
-                />
-                <img
-                  src={
-                    content.backdrop_path
-                      ? `${img_500}/${content.backdrop_path}`
-                      : unavailableLandscape
-                  }
-                  alt={content.name || content.title}
-                  className="ContentModal__landscape"
-                />
-                <div className="ContentModal__about">
-                  <span className="ContentModal__title">
-                    {content.name || content.title} (
-                    {(
-                      content.first_air_date ||
-                      content.release_date ||
-                      "-----"
-                    ).substring(0, 4)}
-                    )
-                  </span>
-                  {content.tagline && (
-                    <i className="tagline">{content.tagline}</i>
-                  )}
-
-                  <span className="ContentModal__description">
-                    {content.overview}
-                  </span>
-
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon />}
-                    color="secondary"
-                    target="__blank"
-                    href={`https://www.youtube.com/watch?v=${video}`}
-                  >
-                    Watch the Trailer
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-        </Fade>
-        </Box>
-      </Modal> */}
     </>
   );
 }
