@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import  makeStyles from "@mui/styled-engine";
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from "@mui/material/Fade";
+import Box from '@mui/material/Box';
 import axios from "axios";
 import {
   img_500,
@@ -12,27 +12,22 @@ import {
 import "./ContentModal.css";
 import Button from '@mui/material/Button';
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Filter } from "@mui/icons-material";
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    width: "90%",
-    height: "80%",
-    bgcolor: "#39445a",
-    border: "1px solid #282c34",
-    borderRadius: 10,
-    color: "white",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(1, 1, 3),
-  },
-}));
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '60%',
+  bgcolor: '#708090',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function ContentModal({ children, media_type, id }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
   const [video, setVideo] = useState();
@@ -81,15 +76,74 @@ export default function ContentModal({ children, media_type, id }) {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        className={classes.modal}
         open={open}
         onClose={handleClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
         }}
       >
+        <Fade in={open}>
+          <Box sx={style}>
+            {content && (
+                <div>
+                  <div className="ContentModal">
+                    <img
+                      src={
+                        content.poster_path
+                          ? `${img_500}/${content.poster_path}`
+                          : unavailable
+                      }
+                      alt={content.name || content.title}
+                      className="ContentModal__portrait"
+                    />
+                    <img
+                      src={
+                        content.backdrop_path
+                          ? `${img_500}/${content.backdrop_path}`
+                          : unavailableLandscape
+                      }
+                      alt={content.name || content.title}
+                      className="ContentModal__landscape"
+                    />
+                    <div className="ContentModal__about">
+                      <span className="ContentModal__title">
+                        {content.name || content.title} (
+                        {(
+                          content.first_air_date ||
+                          content.release_date ||
+                          "-----"
+                        ).substring(0, 4)}
+                        )
+                      </span>
+                      {content.tagline && (
+                        <i className="tagline">{content.tagline}</i>
+                      )}
+
+                      <span className="ContentModal__description">
+                        {content.overview}
+                      </span>
+
+                      <Button
+                        variant="contained"
+                        startIcon={<YouTubeIcon />}
+                        color="secondary"
+                        target="__blank"
+                        href={`https://www.youtube.com/watch?v=${video}`}
+                      >
+                        Watch the Trailer
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+            )}
+          </Box>
+        </Fade>
+      </Modal>
+        {/* <Box>
         <Fade in={open}>
           {content && (
             <div className={classes.paper}>
@@ -144,9 +198,8 @@ export default function ContentModal({ children, media_type, id }) {
             </div>
           )}
         </Fade>
-      </Modal>
+        </Box>
+      </Modal> */}
     </>
   );
 }
-
-
