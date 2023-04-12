@@ -62,7 +62,7 @@ const Genres = ({
       {genres && Array.from(genres).map((genre)=>(
           <Chip
            label={genre.name} 
-           style={{margin: 2}}
+           style={{margin: 2 , color: 'white'}}
            size='small'
            key={genre.id}
            clickable
