@@ -40,7 +40,7 @@ const Search = () => {
         <ThemeProvider theme={mytheme}>
           <div style={{display: "flex" , margin: "12px 10"}}>
             <TextField 
-                style={{ flex: 1 }}
+                style={{ flex: 1, color: 'white'}}
                 className="SearchBox"
                 label="Search"
                 variant="filled"
